@@ -6,6 +6,7 @@ fetch("./data/data.json")
  .then(data => {
     a.push(...data); 
     for (i = 0; i < a.length; i++) {
+
         const card = document.createElement("div");
         card.classList.add("card");
         cardContainer.append(card);
@@ -43,9 +44,15 @@ window.addEventListener("load", () => {
         let randomCard = cards[randomIndex];
         randomCard.style.transform = "rotateY(180deg)";
         rotateCard(randomCard);
+        Shuffle(randomCard); 
  }, 1500);
 });
 
 function Shuffle() {
-
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }
 }
