@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+@mixin Transition($prop, $time: 0.80s, $delay: 0s, $easing: ease) {
+    -webkit-transition: $prop $time $delay $easing;
+    -moz-transition: $prop $time $delay $easing;
+    -ms-transition: $prop $time $delay $easing;
+    -o-transition: $prop $time $delay $easing;
+    transition: $prop $time $delay $easing;
+}
+
+$card-rotate: 180deg;
+$background: #0f1321;
+$card-container: #191f33;
+$card-back: #121212;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: $background;
+}
+
+.card-container {
+    perspective: 400;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding: 20px;
+    width: 725px;
+    height: 80vh;
+    background-color: $card-container;
+    border-radius: 5px;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    justify-self: center;
+    width: 175px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    @include Transition(transform, 0.80s);
+    transform-style: preserve-3d;
+    transform: rotateY(0);
+}
+
+.front,
+.back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 175px;
+    backface-visibility: hidden;
+    height: 235px;
+    border-radius: 4px;
+}
+
+.front {
+    background-image: url("./images/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.back {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #121212;
+    transform: rotateY($card-rotate);
+}
+
+.card:hover {
+    transform: rotateY($card-rotate);
+}
+
+
+.title {
+    display: flex;
+    align-items: center;
+    color: white;
+    letter-spacing: 1px;
+    position: absolute;
+    top: 20px;
+}
+
+.title span {
+    font-size: 50px;
+    color: pink;
+}
+
+.card-title {
+    color: white;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.card-image {
+    padding-top: 10px;
+    width: 100px;
+}

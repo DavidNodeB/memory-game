@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Orangutan",
+        "image": "../images/orangutan.png"
+    },
+    {
+        "name": "Gorrila",
+        "image": "../images/gorrila.png"
+    },
+    {
+        "name": "Proboscis",
+        "image": "../images/proboscis.png"
+    },
+    {
+        "name": "Baboon",
+        "image": "../images/baboon.png"
+    },
+    {
+        "name": "Howler",
+        "image": "../images/howler.png"
+    },
+    {
+        "name": "Tamarin",
+        "image": "../images/tamarin.png"
+    },
+    {
+        "name": "Macaque",
+        "image": "../images/macaque.png"
+    },
+    {
+        "name": "Capuchin",
+        "image": "../images/capuchin.png"
+    },
+    {
+        "name": "Mandrill",
+        "image": "../images/mandrill.png"
+    }
+]
