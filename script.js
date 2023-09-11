@@ -38,9 +38,10 @@ function initializeDeck() {
     cardImage.classList.add("card-image");
     cardImage.src = a[i].image;
     back.append(cardImage);
-}
+  }
 
   setTimeout(() => {
+    // gets random card then runs an animation
     let cards = document.querySelectorAll(".card");
     let randomIndex = Math.floor(Math.random() * a.length);
     let randomCard = cards[randomIndex];
@@ -48,6 +49,7 @@ function initializeDeck() {
     rotateCard(randomCard);
     updateDOM();
     setTimeout(() => {
+      // sets a timer so that the cards will shuffle and the dom will update after the initial animation
       shuffleDeck();
       updateDOM();
     }, 2000);
@@ -58,8 +60,7 @@ function shuffleDeck() {
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     const temp = a[i];
-    a[i] = a[j];
-    a[j] = temp;
+    a[i] = a[j], a[j] = temp;
   }
 }
 
@@ -71,7 +72,7 @@ function updateDOM() {
 
     cardTitle.textContent = a[i].name;
     cardImage.src = a[i].image;
-
+    // allows the card that was chosen to be animated even though it was removed from the array
     if (i !== selectedCardIndex) {
       // mouse hover
       card.addEventListener("mouseenter", () => {
