@@ -24,6 +24,7 @@ $card-back: #121212;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     width: 100%;
     height: 100vh;
     background-color: $background;
@@ -40,6 +41,7 @@ $card-back: #121212;
     height: 80vh;
     background-color: $card-container;
     border-radius: 5px;
+    margin-top: 20px;
 }
 
 .card {
@@ -80,10 +82,6 @@ $card-back: #121212;
     transform: rotateY($card-rotate);
 }
 
-.card:hover {
-    transform: rotateY(180deg);
-}
-
 .title {
     display: flex;
     align-items: center;
@@ -107,6 +105,11 @@ $card-back: #121212;
 .card-image {
     padding-top: 10px;
     width: 100px;
+}
+
+.result {
+    margin-top: 50px;
+    color: white;
 }
 
 @media (max-width: 600px) {

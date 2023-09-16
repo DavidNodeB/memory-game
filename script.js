@@ -1,6 +1,8 @@
 const cardContainer = document.querySelector(".card-container");
+const result = document.querySelector(".result");
 let a = [];
 let selectedCardIndex = -1;
+let randomCard;
 
 fetch("./data/data.json")
   .then((res) => res.json())
@@ -47,11 +49,13 @@ function initializeDeck() {
     let randomCard = cards[randomIndex];
     randomCard.style.transform = "rotateY(180deg)";
     rotateCard(randomCard);
+    shuffleDeck()
     updateDOM();
     setTimeout(() => {
       // sets a timer so that the cards will shuffle and the dom will update after the initial animation
       shuffleDeck();
       updateDOM();
+      winner(randomCard)
     }, 2000);
   }, 1500);
 }
@@ -72,21 +76,25 @@ function updateDOM() {
 
     cardTitle.textContent = a[i].name;
     cardImage.src = a[i].image;
-    // allows the card that was chosen to be animated even though it was removed from the array
-    if (i !== selectedCardIndex) {
-      // mouse hover
-      card.addEventListener("mouseenter", () => {
-        card.style.transform = "rotateY(180deg)";
-      });
-      // mouse unhover
-      card.addEventListener("mouseleave", () => {
-        card.style.transform = "rotateY(0deg)";
-      });
-    }
   });
+}
+
+function winner(randCard) {
+  const cards = document.querySelectorAll(".card");
+  cards.forEach((card) => {
+    card.addEventListener("click", () => {
+      if (card == randCard) {
+        result.textContent = "Winner ✔️";
+      } else {
+        result.textContent = "Try again ❌";
+      }
+    })
+  })
+
 }
 
 window.addEventListener("load", () => {
   shuffleDeck();
   updateDOM();
+  console.clear()
 });
