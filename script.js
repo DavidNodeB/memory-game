@@ -43,28 +43,39 @@ function initializeDeck() {
   }
 
   setTimeout(() => {
-    // gets random card then runs an animation
     let cards = document.querySelectorAll(".card");
     let randomIndex = Math.floor(Math.random() * a.length);
     let randomCard = cards[randomIndex];
     randomCard.style.transform = "rotateY(180deg)";
     rotateCard(randomCard);
-    shuffleDeck()
-    updateDOM();
     setTimeout(() => {
-      // sets a timer so that the cards will shuffle and the dom will update after the initial animation
       shuffleDeck();
       updateDOM();
-      winner(randomCard)
+      winner(randomCard);
     }, 2000);
-  }, 1500);
+  }, 1000);
 }
 
 function shuffleDeck() {
   for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     const temp = a[i];
-    a[i] = a[j], a[j] = temp;
+    a[i] = a[j];
+    a[j] = temp;
+  }
+
+  const cardElements = document.querySelectorAll(".card");
+  const shuffledArray = [];
+
+  for (const card of cardElements) {
+    const randIndex = Math.floor(Math.random() * shuffledArray.length + 1);
+    shuffledArray.splice(randIndex, 0, card);
+  }
+
+  cardContainer.innerHTML = '';
+
+  for (const card of shuffledArray) {
+    cardContainer.append(card);
   }
 }
 
@@ -81,20 +92,26 @@ function updateDOM() {
 
 function winner(randCard) {
   const cards = document.querySelectorAll(".card");
+  const win = new Audio("./sfx/win.mp3")
+  const lose = new Audio("./sfx/lose.mp3");
+  const volume = 0.2;
   cards.forEach((card) => {
     card.addEventListener("click", () => {
-      if (card == randCard) {
+      if (card === randCard) {
         result.textContent = "Winner ✔️";
+        win.play()
+        win.volume = volume;
       } else {
         result.textContent = "Try again ❌";
+        lose.play()
+        lose.volume = volume;
       }
-    })
-  })
-
+    });
+  });
 }
 
 window.addEventListener("load", () => {
   shuffleDeck();
   updateDOM();
-  console.clear()
+  console.clear();
 });
